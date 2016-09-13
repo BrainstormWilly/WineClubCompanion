@@ -1,18 +1,17 @@
 
-<div class="jumbotron">
-  <h1>Welcome Wine Lover!</h1>
-  <p>The <strong>Wine Club Companion</strong> is here to help you get the most out of your wine club experience. </p>
-  <button class="btn btn-primary btn-lg">Learn More</button>
-</div>
+<%= render partial: 'shared/jumbo' %>
 
 <div class="panel panel-default">
   <div class="panel-body">
     <h4>Begin by submitting your email so that we can find your wine clubs</h4>
-    <div class="input-group input-group-lg">
-      <input type="email" class="form-control" placeholder="Email">
-      <span class="input-group-btn">
-        <button class="btn btn-primary" type="button">Find My Clubs!</button>
-      </span>
-    </div>
+    <%= form_for @user, as: :member, url: welcome_search_path(@user) do |f| %>
+      <div class="form-group form-group-lg">
+        <%= f.email_field :email, class: "form-control", placeholder: "Email" %>
+      </div>
+      <div class="form-group form-group-lg">
+        <%= f.submit "Find My Clubs!", class: "btn btn-primary btn-lg" %>
+        <%= link_to "I Already Did That", welcome_login_path, class: "btn btn-default btn-lg" %>
+      </div>
+    <% end %>
   </div>
 </div>

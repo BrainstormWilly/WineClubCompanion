@@ -1,0 +1,12 @@
+<%= render partial: 'shared/jumbo' %>
+
+<h3>We found <%= @clubs.count %> Wine Clubs for email <%= @member.email %>.</h3>
+
+<div class="list=group">
+  <% @clubs.each do |club| %>
+    <div class="list-group-item">
+      <h4 class="list-group-item-heading"><%= club.winery.name %></h4>
+      <p class="list-group-item-text"><%= club.name %> | joined <%= club.created_at.strftime("%B %e, %Y") %></p>
+    </div>
+  <% end %>
+</div>
