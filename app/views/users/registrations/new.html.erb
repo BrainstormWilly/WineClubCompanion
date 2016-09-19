@@ -1,0 +1,42 @@
+<%= render partial: 'shared/jumbo' %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">Create Wine Club Companion User Account</h4>
+  </div>
+  <div class="panel-body">
+    <%= form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
+      <%= devise_error_messages! %>
+      <%= f.hidden_field :role, value: "member" %>
+      <div class="form-group">
+        <%= f.label :firstname %>
+        <%= f.text_field :firstname, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :lastname %>
+        <%= f.text_field :lastname, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "off" %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "Submit", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<%= render "users/shared/links" %>

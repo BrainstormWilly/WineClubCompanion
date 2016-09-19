@@ -4,13 +4,11 @@ class WelcomeController < ApplicationController
     @user = User.new
   end
 
-  def login
-  end
-
   def search
     # normally we will run one or more services here to retrieve clubs
-    @member = User.new(params.require(:member).permit(:email), role: "member")
-    @clubs = Club.all.sample(2)
+    @user = User.new(params.require(:user).permit(:email))
+    @clubs = Club.all.first(2)
+
   end
 
 end

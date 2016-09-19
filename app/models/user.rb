@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  has_many :memberships, dependent: :destroy
+
   # before_save { self.email = email.downcase }
   # after_initialize { self.role ||= :member }
 
@@ -9,5 +11,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   enum role: [:member, :winery, :admin]
+
+  def fullname
+    return "#{self.firstname} #{self.lastname}"
+  end
 
 end

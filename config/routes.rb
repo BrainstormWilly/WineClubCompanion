@@ -2,11 +2,15 @@ Rails.application.routes.draw do
 
 
   get 'welcome/index'
-  get 'welcome/login'
   post 'welcome/search'
 
-  devise_for :users
-  resources :users
+  devise_for :users, controllers:{
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
+  }
+
+  resources :clubs
+  resources :memberships
 
   root 'welcome#index'
 

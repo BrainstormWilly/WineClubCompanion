@@ -1,0 +1,8 @@
+<div class="navbar navbar-default">
+  <div class="navbar-header">
+    <%= link_to "WCC", welcome_index_path, class: "navbar-brand" %>
+  </div>
+  <ul class="nav navbar-nav navbar-right" style="padding-right:20px">
+    <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+  </ul>
+</div>
