@@ -21,7 +21,7 @@ end
 
 csj = Winery.create(
   name: "Chateau St. Jean",
-  address1: "8555 Sonoma Hwy"
+  address1: "8555 Sonoma Hwy",
   city: "Kenwood",
   state: "CA",
   zip: "95452"
@@ -29,7 +29,7 @@ csj = Winery.create(
 
 dcv = Winery.create(
   name: "Dry Creek Vineyard",
-  address1: "3770 Lambert Bridge Rd."
+  address1: "3770 Lambert Bridge Rd.",
   city: "Healdsburg",
   state: "CA",
   zip: "95448"
@@ -39,7 +39,7 @@ wineries = Winery.all
 
 20.times do
   club = Club.create(
-    name: "#{Faker::Lorem.word} Club",
+    name: "#{Faker::Lorem.word.capitalize} Club",
     winery: wineries.sample,
     description: Faker::Lorem.paragraph
   )

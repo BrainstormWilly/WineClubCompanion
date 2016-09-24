@@ -4,9 +4,13 @@
   </div>
 </div>
 
+<%= render partial: 'shared/notices' %>
+
 <div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">Wine Club Companion Login</h4>
+  </div>
   <div class="panel-body">
-    <h4>OK, then use your Companion password to login</h4>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-group form-group-lg">
         <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "Email" %>
