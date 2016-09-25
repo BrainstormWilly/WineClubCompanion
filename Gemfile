@@ -38,3 +38,4 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'active_model_serializers'
 # gem 'bcrypt'
 # gem 'pundit'
+gem 'savon', '~>2.0'
