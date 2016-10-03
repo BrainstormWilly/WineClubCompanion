@@ -18,6 +18,7 @@ class Vin65::V2::ContactService
     # op.build(soap_action: "v201:GetContact", message: req).to_s
     res = @client.call(:get_contact, message: req)
     res.hash
+
   end
 
 end

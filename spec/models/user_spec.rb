@@ -28,8 +28,8 @@ RSpec.describe User, type: :model do
       expect(user).to respond_to(:admin?)
     end
 
-    it "responds to winery?" do
-      expect(user).to respond_to(:winery?)
+    it "responds to manager?" do
+      expect(user).to respond_to(:manager?)
     end
   end
 
@@ -47,14 +47,14 @@ RSpec.describe User, type: :model do
         expect(user.admin?).to be_falsey
       end
 
-      it 'returns false for #winery' do
-        expect(user.winery?).to be_falsey
+      it 'returns false for #manager' do
+        expect(user.manager?).to be_falsey
       end
     end
 
-    context "winery user" do
+    context "manager user" do
       before do
-        user.winery!
+        user.manager!
       end
 
       it "returns false for #member?" do
@@ -65,8 +65,8 @@ RSpec.describe User, type: :model do
         expect(user.admin?).to be_falsey
       end
 
-      it 'returns true for #winery?' do
-        expect(user.winery?).to be_truthy
+      it 'returns true for #manager?' do
+        expect(user.manager?).to be_truthy
       end
     end
 
@@ -83,8 +83,8 @@ RSpec.describe User, type: :model do
         expect(user.admin?).to be_truthy
       end
 
-      it 'returns false for #winery?' do
-        expect(user.winery?).to be_falsey
+      it 'returns false for #manager?' do
+        expect(user.manager?).to be_falsey
       end
     end
   end

@@ -9,7 +9,6 @@
 
 suffixes = [" Winery", " Vineyards", " Estate"]
 5.times do
-
   winery = Winery.create(
     name: Faker::Company.name << suffixes.sample,
     address1: Faker::Address.street_address,
@@ -45,13 +44,66 @@ wineries = Winery.all
   )
 end
 
+clubs = Club.all
 
-# me = User.new(
-#   firstname: "Bill",
-#   lastname: "Langley",
-#   email: "bill@wineglassmarketing.com",
-#   password: "123456"
-#   role: "admin"
-# )
-# me.skip_confirmation!
-# me.save
+5.times do
+  mgr = User.create(
+    firstname: Faker::Name.first_name,
+    lastname: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    password: "123456",
+    role: "manager"
+  )
+  usr = User.create(
+  firstname: Faker::Name.first_name,
+  lastname: Faker::Name.last_name,
+  email: Faker::Internet.email,
+  password: "123456"
+  )
+end
+
+managers = User.where(role: "manager")
+members = User.where(role: "member")
+
+me_user = User.new(
+  firstname: "Bill",
+  lastname: "Langley",
+  email: "bill@wineglassmarketing.com",
+  password: "123456"
+)
+
+me_mgr = User.new(
+  firstname: "William",
+  lastname: "Langley",
+  email: "bill@ynoguy.com",
+  password: "123456",
+  role: "manager"
+)
+
+2.times do
+  mship = Membership.create(
+    club: clubs.sample,
+    user: me_user
+  )
+end
+
+2.times do
+  acct = Account.create(
+    winery: wineries.sample,
+    user: me_mgr
+  )
+end
+
+10.times do
+  mship = Membership.create(
+    club: clubs.sample,
+    user: members.sample
+  )
+end
+
+5.times do
+  acct = Account.create(
+    winery: wineries.sample,
+    user: managers.sample
+  )
+end

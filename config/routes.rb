@@ -4,16 +4,28 @@ Rails.application.routes.draw do
   get 'welcome/index'
   post 'welcome/search'
 
+  # devise_scope :user do
+  #   get '/members/sign_in' => 'users/sessions#member_sign_in'
+  #   post '/members/sign_in' => 'users/sessions#create'
+  #   get '/members/sign_up' => 'users/registrations#member_sign_up'
+  #   get '/managers/sign_in' => 'users/sessions#manager_sign_in'
+  #   post '/managers/sign_in' => 'users/sessions#create'
+  # end
   devise_for :users, controllers:{
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
 
+  resources :accounts
+  resources :members
+  # resources :managers, only: [:edit, :update, :show]
   resources :clubs
   resources :memberships
   resources :wineries
-  resources :managers, except: [:new, :create]
 
+  authenticated :user do
+    root 'memberships#index', as: :authenticated_root
+  end
   root 'welcome#index'
 
 

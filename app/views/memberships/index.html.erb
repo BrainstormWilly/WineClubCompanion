@@ -5,3 +5,18 @@
 <div class="page-header">
   <h1>Dashboard <small>for <%= current_user.fullname %></small></h1>
 </div>
+
+<div class="row">
+  <div class="col-md-6"><h3>Other Content</h3></div>
+  <div class="col-md-6">
+    <h3>Current Club Memberships</h3>
+    <div class="list-group">
+    <% @memberships.each do |m| %>
+        <a href="#" class="list-group-item">
+          <h4><%= m.club.winery.name %> <small><%= m.club.name %></small></h4>
+          <p><%= m.club.description %></p>
+        </a>
+    <% end %>
+    </div>
+  </div>
+</div>

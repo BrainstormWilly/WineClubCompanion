@@ -1,0 +1,16 @@
+<%= render partial: 'shared/nav' %>
+
+<%= render partial: 'shared/notices' %>
+
+<div class="page-header">
+  <h1>Accounts <small>for <%= current_user.fullname %></small></h1>
+</div>
+
+<div class="list-group">
+  <% @accounts.each do |a| %>
+    <a href="#" class="list-group-item">
+      <h4 class="list-group-item-heading"><%= a.winery.name %></h4>
+      <p class="list-group-item-heading"><strong>Clubs: </strong><%= a.winery.clubs.map{ |c| c.name }.join(", ") %></p>
+    </a>
+  <% end %>
+</div>

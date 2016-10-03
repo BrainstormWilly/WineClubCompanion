@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :manager do
+  factory :account do
     user nil
     winery nil
   end
