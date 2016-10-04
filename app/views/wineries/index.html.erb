@@ -1,0 +1,20 @@
+<%= render partial: 'shared/nav' %>
+
+<%= render partial: 'shared/notices' %>
+
+<div class="page-header">
+  <h1>Wineries</h1>
+</div>
+
+<div class="list-group">
+  <% @wineries.each do |w| %>
+    <%= link_to w, class: "list-group-item" do %>
+      <h4 class="list-group-item-heading"><%= w.name %></h4>
+      <p class="list-group-item-text"><strong>Clubs: </strong><%= w.clubs.map{ |c| c.name }.join(", ") %></p>
+      <p class="list-group-item-text">
+        <%= w.address1 %><br/>
+        <%= w.city %>, <%= w.state %> <%= w.zip %>
+      </p>
+    <% end %>
+  <% end %>
+</div>

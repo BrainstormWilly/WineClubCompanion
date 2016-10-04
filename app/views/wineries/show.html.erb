@@ -1,0 +1,16 @@
+<%= render partial: 'shared/nav' %>
+
+<%= render partial: 'shared/notices' %>
+
+<div class="page-header">
+  <h1><%= @winery.name %></h1>
+</div>
+
+<div class="media">
+  <div class="media-body">
+    <p>
+      <%= @winery.address1 %><br/>
+      <%= @winery.city %>, <%= @winery.state %> <%= @winery.zip %>
+    </p>
+  </div>
+</div>
