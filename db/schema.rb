@@ -31,15 +31,6 @@ ActiveRecord::Schema.define(version: 20160929014634) do
     t.index ["winery_id"], name: "index_clubs_on_winery_id"
   end
 
-  create_table "managers", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "winery_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_managers_on_user_id"
-    t.index ["winery_id"], name: "index_managers_on_winery_id"
-  end
-
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "club_id"
