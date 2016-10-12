@@ -1,0 +1,35 @@
+<%= render partial: 'shared/nav' %>
+
+<%= render partial: 'shared/notices' %>
+
+<div class="page-header">
+  <h1><%= @membership.club.name %> <small><%= @membership.club.winery.name %></small></h1>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <% if authorized_to_delete? %>
+      <h3 class="panel-title">Edit <%= @membership.user.fullname %>'s Membership</h3>
+    <% else %>
+      <h3 class="panel-title">Edit Membership</h3>
+    <% end %>
+  </div>
+  <%= form_for @membership do |f| %>
+    <div class="panel-body">
+      <div class="form-group">
+        <strong>WCC Registration </strong><br/>
+        <small>NOTE: Unregistering your membership does not cancel it. Contact the winery directly to cancel your membership.</small><br/>
+        <%= f.radio_button :registered, true, checked: @membership.registered? %>
+        <%= f.label :registered_true, "Yes" %>
+        <%= f.radio_button :registered, false, checked: !@membership.registered? %>
+        <%= f.label :registered_false, "No" %>
+      </div>
+    </div>
+    <div class="panel-footer">
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+      <% if authorized_to_delete? %>
+        <%= link_to "Delete", @membership, method: :delete, class: "btn btn-danger", data: {confirm: "You are about to remove all record of this membership"} %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

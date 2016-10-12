@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
-  resources :accounts
+  resources :accounts, except: [:edit, :update]
   resources :members
   # resources :managers, only: [:edit, :update, :show]
   resources :clubs

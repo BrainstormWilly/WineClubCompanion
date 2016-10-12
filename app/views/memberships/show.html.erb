@@ -1,0 +1,21 @@
+<%= render partial: 'shared/nav' %>
+
+<%= render partial: 'shared/notices' %>
+
+<div class="page-header">
+  <h1><%= @membership.club.name %>
+    <% if authorized_to_delete? %>
+      <br/><small>Member: <%= @membership.user.fullname %></small>
+    <% end %>
+  </h1>
+</div>
+
+<div class="media">
+  <h3 class="media-header"><%= @membership.club.winery.name %>  </h3>
+  <p class="media-text">Joined: <%= @membership.created_at.strftime("%m/%d/%Y") %></p>
+  <p class="media-text"><%= @membership.club.description %></p>
+  <%= link_to "Manage", edit_membership_path(@membership), class: "btn btn-primary" %>
+  <% if authorized_to_delete? %>
+    <%= link_to "Delete", @membership, method: :delete, class: "btn btn-danger", data: {confirm: "You are about to remove all record of this membership"} %>
+  <% end %>
+</div>

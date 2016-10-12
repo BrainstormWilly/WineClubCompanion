@@ -71,6 +71,7 @@ me_user = User.new(
   email: "bill@wineglassmarketing.com",
   password: "123456"
 )
+me_user.save
 
 me_mgr = User.new(
   firstname: "William",
@@ -79,6 +80,16 @@ me_mgr = User.new(
   password: "123456",
   role: "manager"
 )
+me_mgr.save
+
+me_admin = User.new(
+  firstname: "Willy",
+  lastname: "Langley",
+  email: "brainstormwilly@gmail.com",
+  password: "123456",
+  role: "admin"
+)
+me_admin.save
 
 2.times do
   mship = Membership.create(

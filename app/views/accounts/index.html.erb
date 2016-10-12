@@ -3,14 +3,17 @@
 <%= render partial: 'shared/notices' %>
 
 <div class="page-header">
-  <h1>Accounts <small>for <%= current_user.fullname %></small></h1>
+  <h1>
+    Accounts <small>for <%= current_user.fullname %></small>
+    <%= link_to "New", new_account_path, class: "btn btn-success pull-right" %>
+  </h1>
 </div>
 
 <div class="list-group">
   <% @accounts.each do |a| %>
-    <a href="#" class="list-group-item">
+    <%= link_to(a, {class: "list-group-item"}) do %>
       <h4 class="list-group-item-heading"><%= a.winery.name %></h4>
       <p class="list-group-item-heading"><strong>Clubs: </strong><%= a.winery.clubs.map{ |c| c.name }.join(", ") %></p>
-    </a>
+    <% end %>
   <% end %>
 </div>

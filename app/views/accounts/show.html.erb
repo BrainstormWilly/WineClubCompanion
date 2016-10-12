@@ -1,0 +1,14 @@
+<%= render partial: 'shared/nav' %>
+
+<%= render partial: 'shared/notices' %>
+
+<div class="page-header">
+  <h1><%= @account.winery.name %></h1>
+</div>
+
+<div class="media">
+  <h3 class="media-header">Clubs: <%= @account.winery.clubs.map{ |c| c.name }.join(", ") %></h3>
+  <p class="media-text">Created: <%= @account.created_at.strftime("%m/%d/%Y") %></p>
+  <p class="media-text"><%= @account.winery.fulladdress %></p>
+  <%= link_to "Delete", @account, method: :delete, class: "btn btn-danger", data: {confirm: "You are about to remove all record of this account"} %>
+</div>

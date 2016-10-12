@@ -1,0 +1,59 @@
+<%= render partial: 'shared/nav' %>
+
+<%= render partial: 'shared/notices' %>
+
+<div class="page-header">
+  <h1>New Account</h1>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">Wineries</h3></div>
+      <div class="panel-body">
+        <div class="list-group">
+          <% @wineries.each do |w| %>
+            <button class="list-group-item"><%= w.name %></button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">Managers</h3></div>
+      <div class="panel-body">
+        <div class="list-group">
+          <% @managers.each do |m| %>
+            <button class="list-group-item"><%= m.fullname %></button>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3">
+
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="panel-title">New Account</h3></div>
+      <%= form_for @account do |f| %>
+      <div class="panel-body">
+          <%= f.label :winery %>: <%= @winery.name %><br/>
+          <%= f.hidden_field :winery_id, value: @winery.id %>
+          <%= f.label :manager %>: <%= @manager.fullname %><br/>
+          <%= f.hidden_field :manager_id, value: @manager.id %>
+      </div>
+      <div class="panel-footer">
+        <%= f.submit "Add Account", class: "btn btn-primary" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-3">
+
+  </div>
+</div>

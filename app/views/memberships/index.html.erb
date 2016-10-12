@@ -12,10 +12,13 @@
     <h3>Current Club Memberships</h3>
     <div class="list-group">
     <% @memberships.each do |m| %>
-        <a href="#" class="list-group-item">
-          <h4><%= m.club.winery.name %> <small><%= m.club.name %></small></h4>
-          <p><%= m.club.description %></p>
-        </a>
+      <%= link_to(m, {class: "list-group-item"}) do %>
+        <h4><%= m.club.winery.name %> <small><%= m.club.name %></small></h4>
+        <% if !current_user.member? %>
+          <h5>Member: <%= m.user.fullname %></h5>
+        <% end%>
+        <p><%= m.club.description %></p>
+      <% end %>
     <% end %>
     </div>
   </div>
