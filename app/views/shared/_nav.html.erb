@@ -1,8 +1,35 @@
-<div class="navbar navbar-default">
-  <div class="navbar-header">
-    <%= link_to "WCC", welcome_index_path, class: "navbar-brand" %>
+<% if user_signed_in? %>
+
+  <div class="navbar navbar-default">
+    <div class="navbar-header">
+      <%= link_to "WCC", authenticated_root_path, class: "navbar-brand" %>
+    </div>
+
+    <ul class="nav navbar-nav">
+      <% if current_user.member? %>
+        <li><%= link_to "Dashboard", memberships_path %></li>
+      <% else %>
+        <li><%= link_to "Memberships", memberships_path %></li>
+        <li><%= link_to "Accounts", accounts_path %></li>
+        <li><%= link_to "Wineries", wineries_path %></li>
+        <li><%= link_to "Clubs", wineries_path %></li>
+      <% end %>
+    </ul>
+
+    <div>
+      <p class="navbar-text pull-right">
+        <%= current_user.fullname %> | <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+      </p>
+    </div>
+
   </div>
-  <ul class="nav navbar-nav navbar-right" style="padding-right:20px">
-    <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-  </ul>
-</div>
+
+<% else %>
+
+  <div class="jumbotron">
+    <h1>Welcome Wine Lover!</h1>
+    <p>The <strong>Wine Club Companion</strong> is here to help you get the most out of your wine club experience. </p>
+    <button class="btn btn-primary btn-lg">Learn More</button>
+  </div>
+
+<% end %>
