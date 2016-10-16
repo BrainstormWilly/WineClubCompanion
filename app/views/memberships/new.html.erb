@@ -7,15 +7,15 @@
     <%= form_for @membership, html: {class: "form-inline"} do |f| %>
       <div class="form-group">
         <label for="club">Club</label>
-        <input type="text" class="form-control" id="club" value="<%= @club.name %>" disabled>
-        <%= f.hidden_field :club_id, value: @club.id %>
+        <input type="text" class="form-control" id="club" disabled>
+        <%= f.hidden_field :club_id %>
       </div>
       <div class="form-group">
         <label for="member">Member</label>
-        <input type="text" class="form-control" id="member" value="<%= @member.fullname %>" disabled>
-        <%= f.hidden_field :user_id, value: @member.id %>
+        <input type="text" class="form-control" id="member" disabled>
+        <%= f.hidden_field :user_id %>
       </div>
-      <%= f.submit "Add Membership", class: "btn btn-success" %>
+      <%= f.submit "Add Membership", class: "add_membership btn btn-success pull-right" %>
     <% end %>
   </div>
 </div>
@@ -24,10 +24,11 @@
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading"><h3 class="panel-title">Clubs</h3></div>
+      <%= render partial: "shared/list_bar" %>
       <div class="panel-body">
         <div class="list-group">
           <% @clubs.each do |c| %>
-            <button class="list-group-item"><%= c.name %> <small>(<%= c.winery.name %>)</small></button>
+            <a href="" class="clubs list-group-item" data-id="<%= c.id %>" data-name="<%= c.name %>"><%= c.name %> <small>(<%= c.winery.name %>)</small></a>
           <% end %>
         </div>
       </div>
@@ -36,10 +37,11 @@
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading"><h3 class="panel-title">Members</h3></div>
+      <%= render partial: "shared/list_bar" %>
       <div class="panel-body">
         <div class="list-group">
           <% @members.each do |m| %>
-            <button class="list-group-item"><%= m.fullname %></button>
+            <a href="" class="members list-group-item" data-id="<%= m.id %>" data-name="<%= m.fullname %>"><%= m.fullname %></a>
           <% end %>
         </div>
       </div>

@@ -5,7 +5,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <% if authorized_to_delete? %>
-      <h3 class="panel-title">Edit <%= @membership.user.fullname %>'s Membership</h3>
+      <h3 class="panel-title">Edit <%= @membership.user.fullname %>'s <%= @membership.club.name %> Membership</h3>
     <% else %>
       <h3 class="panel-title">Edit Membership</h3>
     <% end %>

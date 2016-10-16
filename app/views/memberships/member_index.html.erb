@@ -8,7 +8,8 @@
     <h3>Current Club Memberships</h3>
     <div class="list-group">
     <% @memberships.each do |m| %>
-      <%= link_to(m, {class: "list-group-item"}) do %>
+      <% reg_class = m.registered? ? "list-group-item-success" : "list-group-item-danger" %>
+      <%= link_to(m, {class: "list-group-item #{reg_class}"}) do %>
         <h4><%= m.club.winery.name %> <small><%= m.club.name %></small></h4>
         <% if !current_user.member? %>
           <h5>Member: <%= m.user.fullname %></h5>

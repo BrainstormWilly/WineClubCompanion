@@ -18,6 +18,8 @@ suffixes = [" Winery", " Vineyards", " Estate"]
   )
 end
 
+wineries = Winery.all
+
 csj = Winery.create(
   name: "Chateau St. Jean",
   address1: "8555 Sonoma Hwy",
@@ -34,7 +36,6 @@ dcv = Winery.create(
   zip: "95448"
 )
 
-wineries = Winery.all
 
 20.times do
   club = Club.create(
@@ -91,20 +92,6 @@ me_admin = User.new(
 )
 me_admin.save
 
-2.times do
-  mship = Membership.create(
-    club: clubs.sample,
-    user: me_user
-  )
-end
-
-2.times do
-  acct = Account.create(
-    winery: wineries.sample,
-    user: me_mgr
-  )
-end
-
 10.times do
   mship = Membership.create(
     club: clubs.sample,
@@ -112,9 +99,28 @@ end
   )
 end
 
-5.times do
-  acct = Account.create(
-    winery: wineries.sample,
-    user: managers.sample
+2.times do
+  mship = Membership.create(
+    club: clubs.sample,
+    user: me_user
   )
+end
+
+Account.create(
+  winery: dcv,
+  user: me_mgr
+)
+
+Account.create(
+  winery: csj,
+  user: me_mgr
+)
+
+wineries.each do |w|
+  unless w == dcv || w == csj
+    acct = Account.create(
+      winery: w,
+      user: managers.sample
+    )
+  end
 end

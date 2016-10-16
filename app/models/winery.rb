@@ -3,6 +3,7 @@ class Winery < ActiveRecord::Base
   default_scope { order('name ASC') }
 
   has_many :clubs
+  has_one :account
 
   validates :name, length: { minimum: 1, maximum: 100 }, presence: true
 

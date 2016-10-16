@@ -1,0 +1,18 @@
+<div class="page-header">
+  <h1>Memberships</h1>
+</div>
+
+<%= render partial: "shared/list_bar", locals: {new_path: new_membership_path} %>
+
+<div class="list-group">
+<% @memberships.each do |m| %>
+  <% reg_class = m.registered? ? "list-group-item-success" : "list-group-item-danger" %>
+  <%= link_to(m, {class: "list-group-item #{reg_class}"}) do %>
+    <h4><%= m.club.name %> <small><%= m.club.winery.name %></small></h4>
+    <% if current_user.admin? %>
+      <h5>Manager: <%= m.club.winery.account.user.fullname %></h5>
+    <% end %>
+    <h5>Member: <%= m.user.fullname %></h5>
+    <p>Since: <%= date_mdy(m.created_at) %></p>
+  <% end %>
+<% end %>

@@ -14,5 +14,8 @@ module ApplicationHelper
   #   @devise_mapping ||= Devise.mappings[:user]
   # end
 
+  def date_mdy(date)
+    date.strftime("%m/%d/%Y")
+  end
 
 end

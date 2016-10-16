@@ -77,7 +77,7 @@ RSpec.describe MembershipsController, type: :controller do
       end
       it "renders index" do
         get :index
-        expect(response).to render_template :index
+        expect(response).to render_template :member_index
       end
     end
     describe "GET #show" do
@@ -141,9 +141,9 @@ RSpec.describe MembershipsController, type: :controller do
         get :index
         expect(response).to have_http_status :success
       end
-      it "renders index" do
+      it "renders member index" do
         get :index
-        expect(response).to render_template :index
+        expect(response).to render_template :member_index
       end
     end
     describe "GET #show" do
@@ -234,9 +234,9 @@ RSpec.describe MembershipsController, type: :controller do
         get :index
         expect(response).to have_http_status :success
       end
-      it "renders index" do
+      it "renders authorized index" do
         get :index
-        expect(response).to render_template :index
+        expect(response).to render_template :authorized_index
       end
     end
     describe "GET #show" do
@@ -336,9 +336,9 @@ RSpec.describe MembershipsController, type: :controller do
         get :index
         expect(response).to have_http_status :success
       end
-      it "renders index" do
+      it "renders authorized index" do
         get :index
-        expect(response).to render_template :index
+        expect(response).to render_template :authorized_index
       end
     end
     describe "GET #show" do
@@ -404,9 +404,9 @@ RSpec.describe MembershipsController, type: :controller do
         get :index
         expect(response).to have_http_status :success
       end
-      it "renders index" do
+      it "renders authorized_index" do
         get :index
-        expect(response).to render_template :index
+        expect(response).to render_template :authorized_index
       end
     end
     describe "GET #show" do

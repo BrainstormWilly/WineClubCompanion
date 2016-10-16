@@ -4,6 +4,11 @@ class MembershipsController < ApplicationController
 
   def index
     @memberships = policy_scope(Membership)
+    if current_user.member?
+      render :member_index
+    else
+      render :authorized_index
+    end
   end
 
   def show
