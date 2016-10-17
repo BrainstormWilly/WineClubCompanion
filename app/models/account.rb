@@ -1,4 +1,7 @@
 class Account < ApplicationRecord
+
+  # default_scope { order('winery ASC') }
+
   belongs_to :user
   belongs_to :winery
 

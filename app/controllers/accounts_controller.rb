@@ -5,6 +5,12 @@ class AccountsController < ApplicationController
 
   def index
     @accounts = policy_scope(Account)
+    if current_user.admin?
+      @managers = User.where(role: 'manager')
+      render :admin_index
+    else
+      render :manager_index
+    end
   end
 
   def show

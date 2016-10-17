@@ -2,14 +2,33 @@
   <h1>New Account</h1>
 </div>
 
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= form_for @account, html: {class: "form-inline"} do |f| %>
+      <div class="form-group">
+        <label for="winery">Winery</label>
+        <input type="text" class="form-control" id="winery" disabled>
+        <%= f.hidden_field :winery_id %>
+      </div>
+      <div class="form-group">
+        <label for="manager">Manager</label>
+        <input type="text" class="form-control" id="manager" disabled>
+        <%= f.hidden_field :user_id %>
+      </div>
+      <%= f.submit "Add Account", class: "add_account btn btn-success pull-right" %>
+    <% end %>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading"><h3 class="panel-title">Wineries</h3></div>
+      <%= render partial: "shared/list_bar" %>
       <div class="panel-body">
         <div class="list-group">
           <% @wineries.each do |w| %>
-            <button class="list-group-item"><%= w.name %></button>
+            <a href="" class="wineries list-group-item" data-id="<%= w.id %>" data-name="<%= w.name %>"><%= w.name %></a>
           <% end %>
         </div>
       </div>
@@ -18,38 +37,14 @@
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading"><h3 class="panel-title">Managers</h3></div>
+      <%= render partial: "shared/list_bar" %>
       <div class="panel-body">
         <div class="list-group">
           <% @managers.each do |m| %>
-            <button class="list-group-item"><%= m.fullname %></button>
+            <a href="" class="managers list-group-item" data-id="<%= m.id %>" data-name="<%= m.fullname %>"><%= m.fullname %></a>
           <% end %>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-3">
-
-  </div>
-  <div class="col-md-3">
-    <div class="panel panel-default">
-      <div class="panel-heading"><h3 class="panel-title">New Account</h3></div>
-      <%= form_for @account do |f| %>
-      <div class="panel-body">
-          <%= f.label :winery %>: <%= @winery.name %><br/>
-          <%= f.hidden_field :winery_id, value: @winery.id %>
-          <%= f.label :manager %>: <%= @manager.fullname %><br/>
-          <%= f.hidden_field :manager_id, value: @manager.id %>
-      </div>
-      <div class="panel-footer">
-        <%= f.submit "Add Account", class: "btn btn-primary" %>
-      </div>
-      <% end %>
-    </div>
-  </div>
-  <div class="col-md-3">
-
   </div>
 </div>

@@ -8,7 +8,7 @@ checkIds = ->
   else
     $(".add_membership").attr('disabled','disabled')
 
-$ ->
+$('.memberships.new').ready ->
   $(document).on 'click', 'a.clubs', (e) ->
     e.preventDefault()
     $("#club").val( $(this).data("name") )

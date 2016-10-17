@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
 
+  default_scope { order('lastname ASC') }
+
   has_many :memberships, dependent: :destroy
+  has_many :accounts, dependent: :destroy
 
   before_save { self.email = email.downcase }
   after_initialize { self.role ||= :member }

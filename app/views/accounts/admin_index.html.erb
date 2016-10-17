@@ -1,0 +1,48 @@
+<div class="page-header">
+  <h1>Accounts</h1>
+</div>
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li><a id='manager' href="">by Manager</a></li>
+      <li><a href="" id='winery'>by Winery</a></li>
+    </ul>
+
+    <form class="navbar-form navbar-left" role="search">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+
+    <form class="navbar-form navbar-right">
+      <%= link_to "New", new_account_path, class: "btn btn-success" %>
+    </form>
+  </div>
+</nav>
+
+<div id="wineries" class="list-group">
+  <% @accounts.each do |a| %>
+    <%= link_to(a, {class: "list-group-item"}) do %>
+      <h4 class="list-group-item-heading"><%= a.winery.name %></h4>
+      <h5 class="list-group-item-heading"><%= a.user.fullname %></h5>
+      <p class="list-group-item-heading"><strong>Clubs: </strong><%= a.winery.clubs.map{ |c| c.name }.join(", ") %></p>
+    <% end %>
+  <% end %>
+</div>
+
+<div id="managers" class="list-group">
+  <% @managers.each do |m| %>
+    <div class="list-group-item">
+      <h4><%= m.fullname %></h4>
+      <% m.accounts.each do |a| %>
+        <%= link_to(a, {class: "list-group-item"}) do %>
+          <h5 class="list-group-item-heading"><%= a.winery.name %></h5>
+          <p class="list-group-item-heading"><strong>Clubs: </strong><%= a.winery.clubs.map{ |c| c.name }.join(", ") %></p>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

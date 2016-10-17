@@ -1,5 +1,10 @@
 <div class="page-header">
-  <h1><%= @account.winery.name %></h1>
+  <% if current_user.admin? %>
+    <h3>Winery: <%= @account.winery.name %><br/>
+    Manager: <%= @account.user.fullname %></h3>
+  <% else %>
+    <h1><%= @account.winery.name %></h1>
+  <% end %>
 </div>
 
 <div class="media">

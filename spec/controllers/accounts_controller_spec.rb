@@ -108,9 +108,9 @@ RSpec.describe AccountsController, type: :controller do
         get :index
         expect(response).to have_http_status(:success)
       end
-      it "renders index" do
+      it "renders manager_index" do
         get :index
-        expect(response).to render_template(:index)
+        expect(response).to render_template(:manager_index)
       end
     end
     describe "GET #show" do
@@ -164,9 +164,9 @@ RSpec.describe AccountsController, type: :controller do
         get :index
         expect(response).to have_http_status(:success)
       end
-      it "renders index" do
+      it "renders manager_index" do
         get :index
-        expect(response).to render_template(:index)
+        expect(response).to render_template(:manager_index)
       end
     end
     describe "GET #show" do
@@ -215,9 +215,9 @@ RSpec.describe AccountsController, type: :controller do
         get :index
         expect(response).to have_http_status(:success)
       end
-      it "renders index" do
+      it "renders admin_index" do
         get :index
-        expect(response).to render_template(:index)
+        expect(response).to render_template(:admin_index)
       end
     end
     describe "GET #new" do
