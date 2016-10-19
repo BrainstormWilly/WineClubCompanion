@@ -7,12 +7,12 @@
     <%= form_for @account, html: {class: "form-inline"} do |f| %>
       <div class="form-group">
         <label for="winery">Winery</label>
-        <input type="text" class="form-control" id="winery" disabled>
+        <input type="text" class="form-control" id="account_winery_name" disabled>
         <%= f.hidden_field :winery_id %>
       </div>
       <div class="form-group">
         <label for="manager">Manager</label>
-        <input type="text" class="form-control" id="manager" disabled>
+        <input type="text" class="form-control" id="account_user_name" disabled>
         <%= f.hidden_field :user_id %>
       </div>
       <%= f.submit "Add Account", class: "add_account btn btn-success pull-right" %>

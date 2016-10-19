@@ -11,8 +11,24 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
 //= require jquery_readyselector
 //= require_tree .
+
+$(document).on('turbolinks:load', function(e){
+  $(".wcc-nav").parent().removeClass('active');
+  if( $(e.target.body).hasClass('accounts') ){
+    $("#accounts-nav").parent().addClass('active');
+  }else if( $(e.target.body).hasClass('memberships') ){
+    $("#memberships-nav").parent().addClass('active');
+  }else if( $(e.target.body).hasClass('wineries') ){
+    $("#wineries-nav").parent().addClass('active');
+  }else if( $(e.target.body).hasClass('clubs') ){
+    $("#clubs-nav").parent().addClass('active');
+  }else if( $(e.target.body).hasClass('users') ){
+    $("#users-nav").parent().addClass('active');
+  }
+});

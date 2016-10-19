@@ -40,3 +40,4 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'bcrypt'
 gem 'pundit'
 gem 'savon', '~>2.0'
+gem 'jquery-turbolinks'
