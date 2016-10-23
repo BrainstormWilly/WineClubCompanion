@@ -21,5 +21,11 @@ class ApplicationController < ActionController::Base
     redirect_to(request.referrer || authenticated_root_path)
   end
 
+  def no_member_access
+    if current_user.member?
+      user_unauthorized
+    end
+  end
+
 
 end

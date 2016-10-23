@@ -1,0 +1,21 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Wineries</h4>
+      </div>
+      <div class="modal-body">
+        <div class="list-group">
+          <% @wineries.each do |w| %>
+            <a href="" class="wineries list-group-item" data-id="<%= w.id %>" data-name="<%= w.name %>" data-dismiss="modal"><%= w.name %></a>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button id="club_winery_name" type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+  <%= @club.winery.name %> <span class="glyphicon glyphicon-menu-down"></span>
+</button>

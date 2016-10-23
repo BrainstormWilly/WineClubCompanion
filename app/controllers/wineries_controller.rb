@@ -1,7 +1,7 @@
 class WineriesController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :verify_access
+  before_action :no_member_access
 
   def index
     @wineries = policy_scope(Winery)
@@ -63,11 +63,11 @@ class WineriesController < ApplicationController
 
   private
 
-  def verify_access
-    if current_user.member?
-      user_unauthorized
-    end
-  end
+  # def verify_access
+  #   if current_user.member?
+  #     user_unauthorized
+  #   end
+  # end
 
   def winery_params
     params.require(:winery).permit(:name, :address1, :address2, :city, :state, :zip)

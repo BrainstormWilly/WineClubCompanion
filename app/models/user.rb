@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :memberships, dependent: :destroy
   has_many :accounts, dependent: :destroy
   has_many :wineries, through: :accounts
+  has_many :clubs, through: :wineries
 
   before_save { self.email = email.downcase }
   after_initialize { self.role ||= :member }

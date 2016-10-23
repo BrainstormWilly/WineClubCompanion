@@ -1,6 +1,6 @@
 class Winery < ActiveRecord::Base
 
-  default_scope { order('name ASC') }
+  # default_scope { order('name ASC') }
 
   has_many :clubs
   has_one :account
