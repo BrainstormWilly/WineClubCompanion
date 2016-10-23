@@ -160,6 +160,7 @@ RSpec.describe WineriesController, type: :controller do
   context "Manager CRUD" do
     before do
       @request.env["devise.mapping"] = Devise.mappings[:manager]
+      my_account = account # need to initialize account to associate winery w/user
       sign_in manager, scope: :user
     end
     describe "GET #index" do
@@ -174,17 +175,17 @@ RSpec.describe WineriesController, type: :controller do
     end
     describe "GET #show" do
       it "returns http success" do
-        get :show, id: winery.id
+        get :show, params: {id: winery.id}
         expect(response).to have_http_status(:success)
       end
       it "renders the #show view" do
-        get :show, id: winery.id
+        get :show, params: {id: winery.id}
         expect(response).to render_template :show
       end
     end
     describe "GET #edit" do
       it "returns http success" do
-        get :show, id: winery.id
+        get :edit, params: { id: winery.id }
         expect(response).to have_http_status(:success)
       end
       it "renders #edit view" do
@@ -239,14 +240,14 @@ RSpec.describe WineriesController, type: :controller do
       end
     end
     describe "DELETE #destroy" do
-      it "it does not destroy winery" do
+      it "it destroys winery" do
         delete :destroy, params: {id: winery.id}
         count = Winery.where({id: winery.id}).size
-        expect(count).to eq 1
+        expect(count).to eq 0
       end
-      it "returns http redirect to root" do
+      it "returns http redirect to wineries" do
         delete :destroy, params: {id: winery.id}
-        expect(response).to redirect_to( authenticated_root_path )
+        expect(response).to redirect_to( wineries_path )
       end
     end
   end # end Manager CRUD
@@ -254,23 +255,28 @@ RSpec.describe WineriesController, type: :controller do
   context "Non-Manager CRUD" do
     before do
       @request.env["devise.mapping"] = Devise.mappings[:manager]
+      my_account = account # need to initialize account to associate winery w/user
       sign_in non_manager, scope: :user
     end
     describe "GET #index" do
-      it "returns http redirect to root" do
+      it "returns http success" do
         get :index
-        expect(response).to redirect_to( authenticated_root_path )
+        expect(response).to have_http_status(:success)
+      end
+      it "renders index" do
+        get :index
+        expect(response).to render_template(:index)
       end
     end
     describe "GET #show" do
       it "returns http redirect to root" do
-        get :index
+        get :show, params: {id: winery.id}
         expect(response).to redirect_to( authenticated_root_path )
       end
     end
     describe "GET #edit" do
       it "returns http redirect to root" do
-        get :index
+        get :edit, params: { id: winery.id }
         expect(response).to redirect_to( authenticated_root_path )
       end
     end
@@ -345,17 +351,17 @@ RSpec.describe WineriesController, type: :controller do
     end
     describe "GET #show" do
       it "returns http success" do
-        get :show, id: winery.id
+        get :show, params: {id: winery.id}
         expect(response).to have_http_status(:success)
       end
       it "renders the #show view" do
-        get :show, id: winery.id
+        get :show, params: {id: winery.id}
         expect(response).to render_template :show
       end
     end
     describe "GET #edit" do
       it "returns http success" do
-        get :show, id: winery.id
+        get :edit, params: { id: winery.id }
         expect(response).to have_http_status(:success)
       end
       it "renders #edit view" do
@@ -395,7 +401,7 @@ RSpec.describe WineriesController, type: :controller do
                     address2: new_winery.address2,
                     city: new_winery.city,
                     state: new_winery.state,
-                    zip: new_winery.zip,
+                    zip: new_winery.zip
                   }
           }}.to change(Winery, :count).by(1)
       end
@@ -407,10 +413,11 @@ RSpec.describe WineriesController, type: :controller do
                     address2: new_winery.address2,
                     city: new_winery.city,
                     state: new_winery.state,
-                    zip: new_winery.zip,
+                    zip: new_winery.zip
                   }
           }
-        expect(response).to redirect_to( Winery.last )
+        w = assigns(:winery)
+        expect(response).to redirect_to( w )
       end
     end
     describe "DELETE #destroy" do

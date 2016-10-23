@@ -21,8 +21,6 @@ class AccountsController < ApplicationController
   def new
     @wineries = Winery.all
     @managers = User.where(role:"manager")
-    @winery = Winery.new(name: "Unknown Winery")
-    @manager = User.new(role: "manager", firstname: "Unknown", lastname: "Manager")
     @account = Account.new
     if current_user.manager?
       @account.user_id = current_user.id
@@ -35,10 +33,12 @@ class AccountsController < ApplicationController
     authorize @account
     if @account.save
       flash[:notice] = 'Account was saved successfully'
+      redirect_to @account
     else
       flash.now[:alert] = 'There was an error saving the account. Please try again later.'
+      render :new
     end
-    redirect_to @account
+
   end
 
   def destroy

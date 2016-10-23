@@ -31,8 +31,6 @@ class MembershipsController < ApplicationController
       wineries = Account.where(user: current_user).map{ |a| a.winery }
       @clubs = Club.where(winery: wineries)
     end
-    @member = User.new(firstname: "New", lastname: "User")
-    @club = Club.new(name: "New Club")
   end
 
   def create
@@ -40,10 +38,12 @@ class MembershipsController < ApplicationController
     authorize @membership
     if @membership.save
       flash[:notice] = 'Membership was saved successfully'
+      redirect_to @membership
     else
       flash.now[:alert] = 'There was an error saving the membership. Please try again later.'
+      render :new
     end
-    redirect_to @membership
+
   end
 
   def update
@@ -52,11 +52,12 @@ class MembershipsController < ApplicationController
     @membership.assign_attributes(update_membership_params)
     if @membership.save
       flash[:notice] = 'Membership was updated successfully'
+      redirect_to @membership
     else
       flash.now[:alert] = 'There was an error saving membership. Please try again later.'
       render :edit
     end
-    redirect_to @membership
+
   end
 
   def destroy

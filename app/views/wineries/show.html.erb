@@ -2,11 +2,19 @@
   <h1><%= @winery.name %></h1>
 </div>
 
-<div class="media">
-  <div class="media-body">
+<div class="panel panel-default">
+  <div class="panel-body">
+    <% if current_user.admin? %>
+      <h4>Manager: <small><%= @winery.account.user.fullname %></small></h4>
+    <% end %>
+    <h4>Clubs: <small><%= @winery.clubs.map{ |c| c.name }.join(", ") %></small></h4>
     <p>
       <%= @winery.address1 %><br/>
       <%= @winery.city %>, <%= @winery.state %> <%= @winery.zip %>
     </p>
+  </div>
+  <div class="panel-footer">
+    <%= link_to "Edit", edit_winery_path(@winery), class: "btn btn-primary" %>
+    <%= link_to "Delete", @winery, method: :delete, class: "btn btn-danger" %>
   </div>
 </div>

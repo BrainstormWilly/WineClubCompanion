@@ -2,6 +2,8 @@
   <h1>Wineries</h1>
 </div>
 
+<%= render partial: "shared/list_bar", locals: {new_path: new_winery_path} %>
+
 <div class="list-group">
   <% @wineries.each do |w| %>
     <%= link_to w, class: "list-group-item" do %>
