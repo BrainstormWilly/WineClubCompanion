@@ -41,19 +41,10 @@ class MembershipPolicy < ApplicationPolicy
     end
 
     def resolve
-      memberships = []
-      if @user.member?
-        memberships = scope.where(user: @user)
-      elsif @user.admin?
-        memberships = scope.all
-      else
-        accounts = Account.where(user: @user)
-        accounts.each do |a|
-          memberships << scope.where(club: Club.where(winery: a.winery))
-        end
-        memberships.flatten!
+      if user.admin?
+        return scope.all
       end
-      memberships
+      user.role_memberships
     end
 
   end

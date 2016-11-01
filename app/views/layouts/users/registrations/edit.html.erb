@@ -1,0 +1,61 @@
+<div class="page-header">
+  <h1>Edit Account</h1>
+</div>
+
+<%= form_for(resource, as: resource_name, url: user_registration_path, html: {method: "put"})  do |f| %>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <%= devise_error_messages! %>
+
+      <div class="form-group">
+        <%= f.label :firstname %>
+        <%= f.text_field :firstname, autofocus: true, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :lastname %>
+        <%= f.text_field :lastname, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "form-control" %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+        <% if @minimum_password_length %>
+          <br />
+          <em><%= @minimum_password_length %> characters minimum</em>
+        <% end %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+        <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+      </div>
+    </div>
+    <div class="panel-footer">
+        <%= f.submit "Update", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Cancel my account</h3>
+  </div>
+  <div class="panel-body">
+    <%= link_to "Delete", edit_user_registration_path, data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-danger" %>
+  </div>
+</div>

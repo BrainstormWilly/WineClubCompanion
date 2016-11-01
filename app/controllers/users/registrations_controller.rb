@@ -1,14 +1,8 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
+    protected
 
-  private
-
-  def after_sign_up_path_for(resource)
-    if resource.manager?
-      return accounts_path
+    def after_update_path_for(resource)
+        user_path(resource)
     end
-    clubs_path
-  end
-
-
 end

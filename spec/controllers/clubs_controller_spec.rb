@@ -21,7 +21,7 @@ RSpec.describe ClubsController, type: :controller do
     end
     describe "GET #show" do
       it "returns http redirect to sign_in" do
-        get :index
+        get :show, params: {id: club.id}
         expect(response).to redirect_to( new_user_session_path )
       end
     end
@@ -92,7 +92,7 @@ RSpec.describe ClubsController, type: :controller do
       end
       describe "GET #show" do
         it "returns http redirect to root" do
-          get :index
+          get :show, params: {id: club.id}
           expect(response).to redirect_to( authenticated_root_path )
         end
       end

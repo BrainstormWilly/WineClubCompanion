@@ -1,0 +1,13 @@
+<div class="page-header">
+  <h1>Members <small>for <%= current_user.fullname %></small></h1>
+</div>
+
+
+<div class="list-group">
+  <% @users.each do |m| %>
+    <%= link_to(m, {class: "list-group-item"}) do %>
+      <h4><%= m.fullname %></h4>
+      <p><%= m.email %></p>
+    <% end %>
+  <% end %>
+</div>

@@ -1,32 +1,24 @@
 Rails.application.routes.draw do
 
-
   get 'welcome/index'
   post 'welcome/search'
 
-  # devise_scope :user do
-  #   get '/members/sign_in' => 'users/sessions#member_sign_in'
-  #   post '/members/sign_in' => 'users/sessions#create'
-  #   get '/members/sign_up' => 'users/registrations#member_sign_up'
-  #   get '/managers/sign_in' => 'users/sessions#manager_sign_in'
-  #   post '/managers/sign_in' => 'users/sessions#create'
+  devise_for :users, controllers: {registrations: "users/registrations"}
+
+  # as :user do
+  #   get 'users', to: 'users#show', as: :user_root
   # end
-  devise_for :users, controllers:{
-    registrations: 'users/registrations',
-    sessions: 'users/sessions'
-  }
 
   resources :accounts, except: [:edit, :update]
-  resources :members
-  # resources :managers, only: [:edit, :update, :show]
   resources :clubs
   resources :memberships
+  resources :users, except: [:new, :create]
   resources :wineries
 
   authenticated :user do
-    root 'memberships#index', as: :authenticated_root
+    root to: 'memberships#index', as: :authenticated_root
   end
-  root 'welcome#index'
+  root to: 'welcome#index'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -23,7 +23,7 @@
   </div>
 </nav>
 
-<div id="wineries" class="list-group">
+<div id="account_wineries" class="list-group">
   <% @accounts.each do |a| %>
     <%= link_to(a, {class: "list-group-item"}) do %>
       <h4 class="list-group-item-heading"><%= a.winery.name %></h4>
@@ -33,7 +33,7 @@
   <% end %>
 </div>
 
-<div id="managers" class="list-group">
+<div id="account_managers" class="list-group">
   <% @managers.each do |m| %>
     <div class="list-group-item">
       <h4><%= m.fullname %></h4>

@@ -44,7 +44,7 @@ class ClubPolicy < ApplicationPolicy
       if user.admin?
         return scope.all
       end
-      user.clubs
+      user.role_clubs
     end
 
   end

@@ -1,0 +1,10 @@
+<div class="page-header">
+  <h1><%= @user.fullname %></h1>
+</div>
+
+<div class="media">
+  <h3 class="media-header"><%= @user.email %>  </h3>
+  <p class="media-text">Joined: <%= @user.created_at.strftime("%m/%d/%Y") %></p>
+  <%= link_to "Edit", edit_user_path(@user), class: "btn btn-primary" %>
+  <%= link_to "Delete", @user, method: :delete, class: "btn btn-danger", data: {confirm: "You are about to remove all record of this user"} %>
+</div>

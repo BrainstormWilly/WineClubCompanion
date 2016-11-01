@@ -41,13 +41,10 @@ class WineryPolicy < ApplicationPolicy
     end
 
     def resolve
-      wineries = []
       if user.admin?
-        wineries = scope.all
-      elsif user.manager?
-        wineries = user.wineries
+        return scope.all
       end
-      wineries
+      user.role_wineries
     end
 
   end

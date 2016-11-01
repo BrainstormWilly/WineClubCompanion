@@ -41,13 +41,11 @@ class AccountPolicy < ApplicationPolicy
     end
 
     def resolve
-      accounts = []
       if user.admin?
-        accounts = scope.all
-      elsif user.manager?
-        accounts = scope.where(user: user)
+        scope.all
+      else user.manager?
+        user.accounts
       end
-      accounts
     end
 
   end

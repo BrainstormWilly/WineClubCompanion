@@ -1,9 +1,10 @@
 class UserPolicy < ApplicationPolicy
 
-  attr_reader :user
+  attr_reader :user, :this_user
 
-  def initialize(user, membership)
+  def initialize(user, this_user)
     @user = user
+    @this_user = this_user
   end
 
   def memberships
@@ -11,27 +12,19 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? || user == current_user
-  end
-
-  def update?
-    show?
+    user == this_user || user.admin? || (user.manager? && user.role_users.include?(this_user))
   end
 
   def edit?
-    show?
+    user.admin? || (user.manager? && user.role_users.include?(this_user))
   end
 
-  def new?
-    user.admin? || user.manager?
+  def update?
+    edit?
   end
-
-  def create?
-    new?
-  end
-
+  
   def destroy?
-    user.admin?
+    edit?
   end
 
   class Scope < Scope
@@ -44,17 +37,11 @@ class UserPolicy < ApplicationPolicy
     end
 
     def resolve
-      users = []
       if user.admin?
-        users = scope.all
+        scope.all
       else
-        accounts = Account.where(user: user)
-        wineries = accounts.map{ |a| a.winery }
-        clubs = Club.where(winery: wineries)
-        memberships = Membership.where( club: clubs )
-        users = memberships.map{ |m| m.user }.uniq{ |u| u.id }
+        user.role_users
       end
-      users
     end
 
   end

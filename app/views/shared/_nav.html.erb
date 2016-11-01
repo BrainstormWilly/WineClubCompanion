@@ -13,13 +13,18 @@
         <li><%= link_to "Accounts", accounts_path, id: "accounts-nav", class: "wcc-nav" %></li>
         <li><%= link_to "Wineries", wineries_path, id: "wineries-nav", class: "wcc-nav" %></li>
         <li><%= link_to "Clubs", clubs_path, id: "clubs-nav", class: "wcc-nav" %></li>
+        <% if current_user.manager? %>
+          <li><%= link_to "Members", users_path, id: "users-nav", class: "wcc-nav" %></li>
+        <% else %>
+          <li><%= link_to "Users", users_path, id: "users-nav", class: "wcc-nav" %></li>
+        <% end %>
       <% end %>
 
     </ul>
 
     <div>
       <p class="navbar-text pull-right">
-        <%= current_user.fullname %> | <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+        <%= link_to current_user.fullname, current_user %> | <%= link_to "Logout", destroy_user_session_path, method: :delete %>
       </p>
     </div>
 

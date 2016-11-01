@@ -56,6 +56,20 @@ class AccountsController < ApplicationController
 
   private
 
+  def after_sign_up_path_for(resource)
+    if resource.manager?
+      return accounts_path
+    end
+    clubs_path
+  end
+
+  def after_sign_in_path_for(resource)
+    if resource.manager?
+      return accounts_path
+    end
+    memberships_path
+  end
+
   def verify_access
     if current_user.member?
       user_unauthorized
