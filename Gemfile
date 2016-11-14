@@ -14,6 +14,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'rb-readline'
   gem 'web-console', '~> 2.0'
   gem 'sqlite3'
 end
@@ -41,3 +42,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'pundit'
 gem 'savon', '~>2.0'
 gem 'jquery-turbolinks'
+gem 'simple_token_authentication', '~> 1.0'
+gem 'active_model_serializers'
+gem 'elasticsearch-rails'
+gem 'elasticsearch-model'

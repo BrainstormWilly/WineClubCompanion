@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :verify_access
+  before_action :no_member_access
 
   def index
     @accounts = policy_scope(Account)

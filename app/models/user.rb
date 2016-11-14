@@ -1,7 +1,14 @@
+require 'elasticsearch/model'
+
 class User < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
+  acts_as_token_authenticatable
 
   has_many :memberships, dependent: :destroy
   has_many :accounts, dependent: :destroy
+
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -11,6 +18,7 @@ class User < ActiveRecord::Base
   default_scope { order('lastname ASC') }
 
   before_save { self.email = email.downcase }
+  before_save :ensure_authentication_token
   after_initialize { self.role ||= :member }
 
   validates :firstname, length: { minimum: 1, maximum: 100 }, presence: true
@@ -21,6 +29,12 @@ class User < ActiveRecord::Base
 
   def fullname
     "#{firstname} #{lastname}"
+  end
+
+  def ensure_authentication_token
+    if authentication_token.blank?
+      self.authentication_token = generate_authentication_token
+    end
   end
 
   # managers and members only
@@ -57,4 +71,16 @@ class User < ActiveRecord::Base
   end
 
 
+
+  private
+
+  def generate_authentication_token
+    loop do
+      token = Devise.friendly_token
+      break token unless User.where(authentication_token: token).first
+    end
+  end
+
 end
+
+User.import force: true

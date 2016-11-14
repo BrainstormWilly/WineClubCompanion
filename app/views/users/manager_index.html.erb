@@ -1,0 +1,6 @@
+<div class="page-header">
+  <h1>Members <small>for <%= current_user.fullname %></small></h1>
+</div>
+
+<%= render partial: "shared/list_bar", locals: {page:"users_members"} %>
+<div id="users_members_list" class="list-group"></div>

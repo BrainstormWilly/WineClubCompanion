@@ -24,26 +24,18 @@
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading"><h3 class="panel-title">Wineries</h3></div>
-      <%= render partial: "shared/list_bar" %>
+      <%= render partial: "shared/list_bar", locals:{page:"accounts_new_wineries"} %>
       <div class="panel-body">
-        <div class="list-group">
-          <% @wineries.each do |w| %>
-            <a href="" class="wineries list-group-item" data-id="<%= w.id %>" data-name="<%= w.name %>"><%= w.name %></a>
-          <% end %>
-        </div>
+        <div id="accounts_new_wineries_list" data-turbolinks="false" class="list-group"></div>
       </div>
     </div>
   </div>
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading"><h3 class="panel-title">Managers</h3></div>
-      <%= render partial: "shared/list_bar" %>
+      <%= render partial: "shared/list_bar", locals:{page:"accounts_new_managers"}  %>
       <div class="panel-body">
-        <div class="list-group">
-          <% @managers.each do |m| %>
-            <a href="" class="managers list-group-item" data-id="<%= m.id %>" data-name="<%= m.fullname %>"><%= m.fullname %></a>
-          <% end %>
-        </div>
+        <div id="accounts_new_managers_list" data-turbolinks="false" class="list-group"></div>
       </div>
     </div>
   </div>

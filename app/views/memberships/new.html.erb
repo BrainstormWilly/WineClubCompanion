@@ -24,26 +24,18 @@
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading"><h3 class="panel-title">Clubs</h3></div>
-      <%= render partial: "shared/list_bar" %>
+      <%= render partial: "shared/list_bar", locals: {page: "memberships_new_clubs", filters:["winery","club"]} %>
       <div class="panel-body">
-        <div class="list-group">
-          <% @clubs.each do |c| %>
-            <a href="" class="clubs list-group-item" data-id="<%= c.id %>" data-name="<%= c.name %>"><%= c.name %> <small>(<%= c.winery.name %>)</small></a>
-          <% end %>
-        </div>
+        <div id="memberships_new_clubs_list" data-turbolinks="false" class="list-group"></div>
       </div>
     </div>
   </div>
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading"><h3 class="panel-title">Members</h3></div>
-      <%= render partial: "shared/list_bar" %>
+      <%= render partial: "shared/list_bar", locals: {page: "memberships_new_members"} %>
       <div class="panel-body">
-        <div class="list-group">
-          <% @members.each do |m| %>
-            <a href="" class="members list-group-item" data-id="<%= m.id %>" data-name="<%= m.fullname %>"><%= m.fullname %></a>
-          <% end %>
-        </div>
+        <div id="memberships_new_members_list" data-turbolinks="false" class="list-group"></div>
       </div>
     </div>
   </div>

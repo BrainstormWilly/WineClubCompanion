@@ -15,6 +15,26 @@ Rails.application.routes.draw do
   resources :users, except: [:new, :create]
   resources :wineries
 
+
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      get "accounts", to: "accounts#by_winery"
+      get "accounts/managers", to: "accounts#by_manager"
+      get "clubs/wineries", to: "clubs#by_winery"
+      get "clubs", to: "clubs#by_club"
+      post "accounts", to: "accounts#search_by_winery"
+      post "accounts/managers", to: "accounts#search_by_manager"
+      post "clubs/wineries", to: "clubs#search_by_winery"
+      post "clubs", to: "clubs#search_by_club"
+      post "memberships/search", to: "memberships#search"
+      post "members/search", to: "users#search_members"
+      post "managers/search", to: "users#search_managers"
+      post "wineries/search", to: "wineries#search"
+    end
+  end
+
+
+
   authenticated :user do
     root to: 'memberships#index', as: :authenticated_root
   end

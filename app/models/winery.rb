@@ -1,6 +1,8 @@
-class Winery < ActiveRecord::Base
+require 'elasticsearch/model'
 
-  # default_scope { order('name ASC') }
+class Winery < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 
   has_many :clubs
   has_one :account
@@ -17,3 +19,5 @@ class Winery < ActiveRecord::Base
   end
 
 end
+
+Winery.import force: true
