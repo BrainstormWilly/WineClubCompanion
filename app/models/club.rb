@@ -12,5 +12,4 @@ class Club < ActiveRecord::Base
 
 end
 
-Club.import
-
+Club.import force: true
