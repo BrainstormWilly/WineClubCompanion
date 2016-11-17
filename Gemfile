@@ -22,6 +22,7 @@ end
 group :production do
   gem 'pg'
   gem 'rails_12factor'
+  gem 'bonsai-elasticsearch-rails'
 end
 
 gem 'bootstrap-sass'
@@ -46,4 +47,3 @@ gem 'simple_token_authentication', '~> 1.0'
 gem 'active_model_serializers'
 gem 'elasticsearch-rails'
 gem 'elasticsearch-model'
-gem 'bonsai-elasticsearch-rails'
