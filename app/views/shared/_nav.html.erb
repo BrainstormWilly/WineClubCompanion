@@ -8,6 +8,7 @@
     <ul class="nav navbar-nav">
       <% if current_user.member? %>
         <li><%= link_to "Dashboard", memberships_path, id: "memberships-nav", class: "wcc-nav" %></li>
+        <li><%= link_to "Subscriptions", subscriptions_path, id: "subscriptions-nav", class: "wcc-nav" %></li>
       <% else %>
         <li><%= link_to "Memberships", memberships_path, id: "memberships-nav", class: "wcc-nav" %></li>
         <li><%= link_to "Accounts", accounts_path, id: "accounts-nav", class: "wcc-nav" %></li>

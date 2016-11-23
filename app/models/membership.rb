@@ -20,7 +20,7 @@ class Membership < ActiveRecord::Base
       "user_fullname" => user.fullname,
       "club_name" => club.name
     }
-  end  
+  end
 
 end
 

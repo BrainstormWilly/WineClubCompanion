@@ -5,6 +5,7 @@ class Winery < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
 
   has_many :clubs
+  has_many :activities
   has_one :account
 
   validates :name, length: { minimum: 1, maximum: 100 }, presence: true

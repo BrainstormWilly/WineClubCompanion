@@ -1,6 +1,15 @@
 class Api::V1::WineriesController < Api::V1::BaseController
 
-  before_action :no_member_access
+  # before_action :no_member_access
+
+  def index
+    if current_user.admin?
+      w = Winery.all
+    else
+      w = current_user.role_wineries
+    end
+    render json: w.uniq, each_serializer: WinerySerializer
+  end
 
   def search
 

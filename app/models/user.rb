@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   has_many :memberships, dependent: :destroy
   has_many :accounts, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
 
 
   # Include default devise modules. Others available are:
@@ -32,41 +33,67 @@ class User < ActiveRecord::Base
   end
 
   def ensure_authentication_token
-    if authentication_token.blank?
+    if self.authentication_token.blank?
       self.authentication_token = generate_authentication_token
     end
   end
 
+  def is_subscribed_to_winery?(winery)
+    self.subscriptions.each do |s|
+      if s.delivery.activity.winery == winery
+        return true
+      end
+    end
+    false
+  end
+
+
   # managers and members only
   def role_memberships
-    if member?
-      memberships
+    if self.member?
+      self.memberships
     else
-      role_clubs.map{ |c| c.memberships }.flatten
+      self.role_clubs.map{ |c| c.memberships }.flatten
     end
   end
 
   def role_wineries
-    if member?
-      memberships.map{ |m| m.club.winery }
+    if self.member?
+      self.memberships.map{ |m| m.club.winery }.uniq
     else
-      accounts.map{ |a| a.winery }
+      self.accounts.map{ |a| a.winery }
     end
   end
 
   def role_clubs
-    if member?
-      memberships.map{ |m| m.club }
+    if self.member?
+      self.memberships.map{ |m| m.club }
     else
-      role_wineries.map{ |w| w.clubs }.flatten
+      self.role_wineries.map{ |w| w.clubs }.flatten
+    end
+  end
+
+  def role_activities
+    if self.member?
+      self.subscriptions.map{ |s| s.delivery.activity }.uniq
+    else
+      self.role_wineries.map{ |w| w.activities }.flatten
+    end
+  end
+
+  def role_subscriptions
+    if self.member?
+      self.subscriptions
+    else
+      self.role_memberships.map{ |m| m.user.subscriptions }.flatten.uniq
     end
   end
 
   def role_users
-    if member?
+    if self.member?
       [self]
     else
-      role_memberships.map{ |m| m.user }.uniq
+      self.role_memberships.map{ |m| m.user }.uniq
     end
   end
 

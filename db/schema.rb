@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105015121) do
+ActiveRecord::Schema.define(version: 20161120000915) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 20161105015121) do
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_accounts_on_user_id"
     t.index ["winery_id"], name: "index_accounts_on_winery_id"
+  end
+
+  create_table "activities", force: :cascade do |t|
+    t.string   "name"
+    t.string   "activity_type"
+    t.string   "activity_sub_type"
+    t.integer  "winery_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["winery_id"], name: "index_activities_on_winery_id"
   end
 
   create_table "clubs", force: :cascade do |t|
@@ -31,6 +41,22 @@ ActiveRecord::Schema.define(version: 20161105015121) do
     t.index ["winery_id"], name: "index_clubs_on_winery_id"
   end
 
+  create_table "deliveries", force: :cascade do |t|
+    t.integer  "channel"
+    t.integer  "activity_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["activity_id"], name: "index_deliveries_on_activity_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "club_id"
@@ -39,6 +65,44 @@ ActiveRecord::Schema.define(version: 20161105015121) do
     t.boolean  "registered"
     t.index ["club_id"], name: "index_memberships_on_club_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "promotions", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "sub_type"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "publications", force: :cascade do |t|
+    t.integer  "winery_id"
+    t.integer  "activity_id"
+    t.string   "activity_type"
+    t.datetime "launch_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["winery_id"], name: "index_publications_on_winery_id"
+  end
+
+  create_table "shipments", force: :cascade do |t|
+    t.integer  "order_id"
+    t.datetime "ship_at"
+    t.datetime "arrival_at"
+    t.text     "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "delivery_id"
+    t.boolean  "activated"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["delivery_id"], name: "index_subscriptions_on_delivery_id"
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

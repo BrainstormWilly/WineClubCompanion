@@ -14,14 +14,18 @@ Rails.application.routes.draw do
   resources :memberships
   resources :users, except: [:new, :create]
   resources :wineries
+  resources :subscriptions, only: [:index]
 
 
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
       get "accounts", to: "accounts#by_winery"
       get "accounts/managers", to: "accounts#by_manager"
+      get "activities/winery/:id", to: "activities#by_winery"
       get "clubs/wineries", to: "clubs#by_winery"
       get "clubs", to: "clubs#by_club"
+      get "subscriptions", to: "subscriptions#index"
+      get "wineries", to: "wineries#index"
       post "accounts", to: "accounts#search_by_winery"
       post "accounts/managers", to: "accounts#search_by_manager"
       post "clubs/wineries", to: "clubs#search_by_winery"
@@ -30,6 +34,7 @@ Rails.application.routes.draw do
       post "members/search", to: "users#search_members"
       post "managers/search", to: "users#search_managers"
       post "wineries/search", to: "wineries#search"
+      put "subscriptions/:id", to: "subscriptions#update"
     end
   end
 

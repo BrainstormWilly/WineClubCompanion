@@ -39,5 +39,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def member_only_access
+    if !current_user.member?
+      user_unauthorized
+    end
+  end
+
 
 end

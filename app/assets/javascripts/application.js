@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require bootstrap
 //= require jquery_readyselector
+//= require bootstrap-switch.min
 //= require_tree .
 
 $(document).on('turbolinks:load', function(e){
@@ -30,5 +31,7 @@ $(document).on('turbolinks:load', function(e){
     $("#clubs-nav").parent().addClass('active');
   }else if( $(e.target.body).hasClass('users') ){
     $("#users-nav").parent().addClass('active');
+  }else if( $(e.target.body).hasClass('subscriptions') ){
+    $("#subscriptions-nav").parent().addClass('active');
   }
 });
